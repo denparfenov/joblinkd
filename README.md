@@ -2,7 +2,7 @@
 
 
 ```
-#!json
+#!nginx
 
 server {
   listen 80;
