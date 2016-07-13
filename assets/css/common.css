@@ -1,0 +1,353 @@
+body,
+html {
+    width: 100%;
+    height: 100%;
+    word-break: break-word;
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: "Lato","Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-weight: 400;
+}
+
+h2>span {
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.intro-header {
+    padding-top: 60px; /* If you're making other pages, make sure there is 50px of padding to make sure the navbar doesn't overlap content! */
+    padding-bottom: 50px;
+    color: #f8f8f8;
+    background: url(../img/bridge2.jpg) no-repeat center center;
+    background-size: cover;
+    height: 100%;
+    text-align: center;
+}
+
+.intro-message {
+    position: relative;
+    padding-top: 200px;
+}
+
+.intro-message > h2 {
+    margin: 0;
+    text-shadow: 2px 2px 3px rgba(0,0,0,0.6);
+
+}
+
+.intro-divider {
+    width: 400px;
+    border-top: 1px solid #f8f8f8;
+    border-bottom: 1px solid rgba(0,0,0,0.2);
+}
+
+.intro-message > h3 {
+    text-shadow: 2px 2px 3px rgba(0,0,0,0.6);
+}
+
+.form-group-lg {
+    display: inline-block;
+    margin-bottom: 5px;
+}
+
+.form-group-lg+.form-group-lg {
+    margin-left: 10px;
+}
+
+.input-green {
+    border: solid 10px #80aa37;
+}
+
+.input-green>input,
+.input-green .btn {
+    border-radius: 0px;
+    border:none;
+}
+
+footer {
+    background: url(../img/crowd.jpg) 50% 58% no-repeat;
+    padding: 100px 0;
+    background-color: #ffffff;
+    bottom: 0;
+    width: 100%;
+    height: 444px;
+    text-align: center;
+}
+
+.gray-footer {
+    margin-top: 344px;
+    padding: 20px;
+    background-color: #f7f7f8;
+    width: 100%;
+}
+
+p.copyright {
+    margin: 15px 0 0;
+}
+
+label {
+    display: block;
+    text-align: left;
+}
+
+.help-block {
+    font-size: 11px;
+    text-align: left;
+}
+
+.navbar {
+    padding-top: 10px;
+}
+
+.navbar li {
+    margin-right: 5px;
+}
+
+.navbar-fixed-top .nav {
+    padding-top: 10px;
+    padding-bottom: 15px;
+}
+
+.navbar-fixed-top .navbar-brand {
+    padding: 10px 15px;
+}
+
+.navbar-inverse,
+.navbar-inverse .navbar-toggle {
+    border-color: #80aa37;
+}
+
+.navbar-green {
+    background-color: #80aa37;
+}
+
+.navbar-a {
+    color: #ffffff;
+    margin-right: 20px;
+    font-size: 18px;
+}
+
+.nav .open>a,
+.nav .open>a:focus,
+.nav .open>a:active,
+.nav .open>a:hover {
+    text-decoration: none;
+    color: #ffffff;
+    background-color: #80aa37;
+    border-color: #80aa37;
+    }
+a:focus,
+a:hover {
+    text-decoration: none;
+}
+
+.header-search {
+    margin: 22px 0;
+}
+
+li .btn-sm {
+    height: 30px;
+}
+
+.title-blue {
+    color: #55d5fd;
+}
+
+.title-green {
+    color:#80aa37;
+}
+
+.logo {
+    font-size: 30px;
+}
+
+.logo a {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.page-content {
+    padding-top: 80px;
+}
+
+.res-title {
+    font-weight: 700;
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.jobs {
+    margin-bottom: 20px;
+}
+
+.jobs-heading {
+    color: #00A9CC;
+    font-size: 18px;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.jobs-place {
+    font-size: 14px;
+    line-height: 15px;
+    text-decoration: none;
+}
+
+.jobs-description {
+    text-decoration: none;
+    color: #5b5b5b;
+    font-size: 13px;
+}
+
+.jobs-description p {
+    margin-bottom: 0px;
+}
+
+.jobfoot {
+    font-size: 11px;
+    color: #797979;
+}
+
+.rel-searches h2,
+.rel-location h2,
+.rel-company h2,
+.rel-title h2 {
+    color: #ee8311;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.save-search {
+    width: 230px;
+}
+
+.search-bar .form-group {
+    margin-bottom: 0px;
+}
+
+.autofill-form,
+.logo-area {
+    display: inline-block;
+}
+
+.autofill-form {
+    border: 4px solid gray;
+    margin-right: -3px;
+}
+
+.autofill-form input{
+    color: #555;
+    outline: none;
+    border: 0;
+}
+
+.logo-area {
+    background-color: #80aa37;
+    border: 5px solid #80aa37;
+}
+
+.logo-area img {
+    width: 70px;
+}
+
+@media(max-width:767px) {
+    .intro-message {
+        padding-bottom: 15%;
+    }
+
+    .intro-message > h1 {
+        font-size: 3em;
+    }
+
+    .intro-divider {
+        width: 100%;
+    }
+
+    nav {
+        text-align: center;
+    }
+
+    .form-group-lg+.form-group-lg {
+    margin-left: 0px;
+    }
+
+    .page-content {
+    padding-top: 70px;
+    }
+
+    .res-filter .pull-right {
+        float: left !important;
+    }
+
+    .navbar-inverse .navbar-nav .open .dropdown-menu>li>a {
+        color:#ffffff;
+    }
+}
+
+@media (min-width: 768px) {
+    .form-inline .form-control {
+        width: 300px;
+    }
+    .res-number {
+        text-align: right;
+    }
+}
+
+@media (min-width: 1441px) {
+    .logo-area {
+        margin-right: -1px;
+    }
+}
+
+.btn-group-lg>.btn, .btn-lg {
+    border-radius: 0px;
+    height: 46px;
+}
+
+.title {
+    margin-top:  30px;
+}
+
+.logo img {
+    width: 180px;
+    margin: 60px 0;
+}
+
+.logo-brand img {
+    width: 188px;
+    margin-top: 8px;
+}
+
+.list-job {
+    margin-bottom: 0px;
+}
+
+blockquote {
+    font-size:  26px;
+}
+
+.icon-gray {
+    background: #e4e4e4;
+}
+
+.nav-tabs {
+    border: 0;
+}
+
+.nav-tabs>li.active>a {
+    color: #ffffff;
+    background-color: #80aa37;
+    border: 0;
+    min-width: 100px;
+}
+
+.job-company {
+    font-weight: 700;
+}

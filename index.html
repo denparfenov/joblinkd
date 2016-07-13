@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <base href="/" />
+
+    <title>Search for a Jobs</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
+    integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7"
+    crossorigin="anonymous" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="assets/css/common.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="assets/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+  <script id="jobsTmpl" type="text/x-jquery-tmpl">
+    <div class="jobs">
+        <div class="jobs-content">
+            <div class="jobs-heading" onclick="${onclick}">${title}</div>
+            <div class="jobs-place">
+                <ul class="list-inline list-job">
+                    <li class="job-company">${company}</li>
+                    <li><img src="http://assets.j2c.com/img/location.png?v=20" alt=""></li>
+                    <li>${city[0]}</li>
+                </ul>
+            </div>
+            <div class="jobs-description">
+            <p>${description}</p>
+            </div>
+        </div>
+    </div>
+  </script>
+
+
+
+    <nav id="simple-nav" class="navbar navbar-inverse navbar-green navbar-fixed-top" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <div class="row">
+                    <div class="col-sm-4 col-md-3 logo-brand">
+                        <a href="/">
+                            <img src="assets/img/logo-white.png" alt="">
+                        </a>
+                    </div>
+                    <div class="col-sm-8 col-md-9 col-lg-9">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <ul class="nav navbar-nav">
+                                    <li>
+                                        <div class="dropdown">
+                                            <a href="#" class="navbar-a dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                                New York
+                                                <span class="caret"></span>
+                                            </a>
+                                              <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                                <li><a href="#">Action</a></li>
+                                                <li><a href="#">Another action</a></li>
+                                                <li><a href="#">Something else here</a></li>
+                                                <li role="separator" class="divider"></li>
+                                                <li><a href="#">Separated link</a></li>
+                                              </ul>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="dropdown">
+                                            <a href="#" class="navbar-a dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                                Popular
+                                                <span class="caret"></span>
+                                            </a>
+                                              <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                                <li><a href="#">Action</a></li>
+                                                <li><a href="#">Another action</a></li>
+                                                <li><a href="#">Something else here</a></li>
+                                                <li role="separator" class="divider"></li>
+                                                <li><a href="#">Separated link</a></li>
+                                              </ul>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="dropdown">
+                                            <a href="#" class="navbar-a dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                                Advise
+                                                <span class="caret"></span>
+                                            </a>
+                                              <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                                <li><a href="#">Action</a></li>
+                                                <li><a href="#">Another action</a></li>
+                                                <li><a href="#">Something else here</a></li>
+                                                <li role="separator" class="divider"></li>
+                                                <li><a href="#">Separated link</a></li>
+                                              </ul>
+                                        </div>
+                                    </li>
+                                </ul>
+                                <ul class="nav navbar-nav pull-right hidden-xs hidden-sm">
+                                    <li>
+                                        <div class="dropdown">
+                                            <a href="#" class="navbar-a dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                                Recent Searches
+                                                <span class="caret"></span>
+                                            </a>
+                                              <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                                <li><a href="#">Action</a></li>
+                                                <li><a href="#">Another action</a></li>
+                                                <li><a href="#">Something else here</a></li>
+                                                <li role="separator" class="divider"></li>
+                                                <li><a href="#">Separated link</a></li>
+                                              </ul>
+                                        </div>
+                                    </li>
+                                </ul>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+    <nav id="base-nav" style="display: none;" class="navbar navbar-inverse navbar-green navbar-fixed-top" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <div class="row">
+                    <div class="col-sm-4 col-md-3 logo-brand">
+                        <a href="/">
+                            <img src="assets/img/logo-white.png" alt="">
+                        </a>
+                    </div>
+                    <div class="col-xs-10 col-xs-offset-1 col-sm-offset-0 col-sm-8 col-md-9">
+                        <ul id="search-form-top" class="nav navbar-nav">
+                            <li>
+                                <input type="text" name="query" class="form-control input-sm" placeholder="Job Title, Keywords">
+                            </li>
+                            <li>
+                                <input type="text" name="location" class="form-control input-sm" placeholder="Location">
+                            </li>
+                            <li><div id="search-btn" class="btn-sm btn-primary">Find Jobs</div></li>
+                        </ul>
+                        <ul class="nav navbar-nav pull-right hidden-xs hidden-sm">
+                            <li>
+                                <div class="dropdown">
+                                    <a href="#" class="navbar-a dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                        Recent Searches
+                                        <span class="caret"></span>
+                                    </a>
+                                      <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                        <li><a href="#">Action</a></li>
+                                        <li><a href="#">Another action</a></li>
+                                        <li><a href="#">Something else here</a></li>
+                                        <li role="separator" class="divider"></li>
+                                        <li><a href="#">Separated link</a></li>
+                                      </ul>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+    <div id="intro" class="intro-header">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="intro-message">
+                        <h2>What type of <span>work</span> are you looking for?</h2>
+                        <hr class="intro-divider">
+                        <form id="search-form">
+                            <div class="col-xs-12 col-md-8 col-md-offset-2">
+                            	<div class="search-bar">
+                                <ul class="hidden-xs nav nav-tabs" role="tablist">
+                                    <li role="presentation" class="tab1 active">
+                                        <a href="#all" aria-controls="all" role="tab" data-toggle="tab" aria-expanded="true">Jobs <span></span> <span class="add"></span>
+                                    </a>
+                                    </li>
+                                </ul>
+                                    <div class="form-group">
+                                        <div class="input-group input-green">
+                                          <input type="text" name="query" class="form-control input-lg" placeholder="Job Title, Keywords">
+                                          <span id="search-btn" class="input-group-btn">
+                                            <a href="/results">
+                                            <div class="btn-lg btn-default icon-gray" type="button">
+                                                    <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                                            </div>
+                                            </a>
+                                          </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="autofill-bar pull-right">
+                                    <div class="form-group">
+                                    <div class="autofill-form">
+                                        <input type="text" name="location" placeholder="Location">
+                                    </div>
+                                    <div class="logo-area">
+                                        <img src="assets/img/logo-white.png" alt="">
+                                    </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /.container -->
+    </div>
+    <!-- /.intro-header -->
+
+<div id="index-content" class="container text-center">
+    <div class="row">
+        <div class="col-xs-12">
+            <h2 class="title">Great companies are on Joblinkd</h2>
+        </div>
+        <div class="col-sm-4 logo">
+            <img src="assets/img/att.png" alt="">
+        </div>
+        <div class="col-sm-4 logo">
+            <img src="assets/img/coke.png" alt="">
+        </div>
+        <div class="col-sm-4 logo">
+            <img src="assets/img/disney.png" alt="">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <blockquote>
+                <q>Joblinkd is a comprehensive resource that can help you find a gig for extra cash or your next big career move.</q>
+            </blockquote>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-4 logo">
+            <img src="assets/img/ups.png" alt="">
+        </div>
+        <div class="col-sm-4 logo">
+            <img src="assets/img/amazon.png" alt="">
+        </div>
+        <div class="col-sm-4 logo">
+            <img src="assets/img/uber.png" alt="">
+        </div>
+    </div>
+</div>
+
+<div id="terms-content" class="page-content">
+    <div class="container">
+        <h2>Terms of Use Agreement</h2>
+
+ALL USERS MUST READ THESE TERMS AND CONDITIONS OF USE CAREFULLY
+<p>Use of this Site is free to our visitors. By using this Site, you agree to be bound by the following terms and conditions of use. If you do not understand and agree to these terms and conditions, you are expressly prohibited from making any use of this Site.</p>
+
+<h3>1. Acceptance of Agreement</h3>
+
+<p>By making any use of Joblinkd.com (&quot;this Site&quot;), you agree to the terms and conditions contained in this Terms of Use Agreement (&quot;Agreement&quot;). This Agreement constitutes our entire agreement with you, and supersedes any prior or contemporaneous agreements, representations, warranties and understandings with respect to the Site, the content, and any products or services offered on the Site.</p>
+
+<h3>2. Consent to Use of Personal Information</h3>
+<p>By entering any of your personal information into this Site, or by allowing others to do so on
+
+your behalf, you expressly authorize us to convey, transfer, sell, or otherwise share your
+
+personal information, including without limitation, your name and contact information, to 3rd
+
+parties for the purpose of soliciting you regarding educational and other opportunities, except
+
+where prohibited by law. You expressly agree to allow us, or our 3rd party affiliates, to contact
+
+you at any email address you provide to us, for the purpose of contacting you for marketing
+
+purposes. You are not required to provide us with the above-mentioned consent in order to
+
+purchase any product or service or to participate in any promotion. All of our offers are void
+
+where prohibited by law. We must emphasize that by entering any of your personal
+
+information, you are inviting us to contact you about various products and services, and to
+
+allow others to contact you for the same purpose. If you do not wish to be contacted, you
+
+should not use this Site or share your contact information with us. In some jurisdictions, even
+
+if you provide your contact information to us, we may be prohibited by law from contacting
+
+you. If your jurisdiction will not allow us to follow up on your request for information or offers,
+
+we apologize for this inconvenience. We are committed to complying with all applicable laws
+
+and regulations.</p>
+
+
+<h3>3. The &quot;Contact Us&quot; feature</h3>
+
+<p>The &quot;Contact Us&quot; feature of the Site delivers user messages to Joblinkd.com via email, which
+
+is not guaranteed to be a secure means of communication. Therefore, please do not send us
+
+confidential or sensitive information via the Site. We will not be liable for any intercepted,
+
+altered, or disclosed communications transmitted via the Site or through the &quot;Contact Us&quot;
+
+feature.</p>
+
+<h3>4. Intellectual Property</h3>
+
+<p>The content, organization, graphics, and design of this Site (&quot;Content&quot;) are protected under
+
+State, Federal, and International copyright and trademark laws and treaties. You may not
+
+modify, publish, transmit, distribute, perform, participate in the transfer or sale, create
+
+derivative works of, or in any way exploit, any of the Content, in whole or in part, without our
+
+express prior written consent.</p>
+
+<h3>5. Modification</h3>
+
+<p>We reserve the right in our sole discretion, without any obligation and without any notice to
+
+you, to edit or delete any documents, information or other content appearing on the Site,
+
+including this Agreement. It is the user&#39;s responsibility to check back frequently for updates to
+
+this Agreement.</p>
+
+BEFORE USING THIS SITE.
+
+<h3>6. Indemnification</h3>
+
+<p>YOU EXPRESSLY UNDERSTAND AND AGREE THAT WE AND OUR AFFILIATES SHALL
+
+NOT BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+
+CONSEQUENTIAL, EXEMPLARY OR PUNITIVE DAMAGES, OR ANY OTHER DAMAGES
+
+WHATSOEVER, INCLUDING BUT NOT LIMITED TO, DAMAGES FOR LOSS OF PROFITS,
+
+GOODWILL, USE, DATA OR OTHER INTANGIBLE LOSSES (EVEN IF WE HAVE BEEN
+
+ADVISED OF THE POSSIBILITY OF SUCH DAMAGES), ARISING OUT OF, OR
+
+RESULTING FROM,
+
+ the use or the inability to use the site;
+
+ the use of any content or other material on the site or any website or websites linked to the
+
+site,
+
+ the cost of procurement of substitute goods and services resulting from any goods, data,
+
+information or services purchased or obtained, or messages received or transactions
+
+entered into, through or from this site;
+
+ unauthorized access to or alteration of your transmissions or data;
+
+ statements or conduct of any third party on our site; or
+
+ any other matter relating to our site. in no event shall our total liability to you for all
+
+damages, losses, and causes of action (whether in contract, tort (including but not limited
+
+to negligence), or otherwise exceed the amount paid by you, if any, for accessing our site.
+
+if you are dissatisfied with any portion of our site, or with any of these terms &amp; conditions,
+
+your sole and exclusive remedy is the discontinuation of your use of this site.</p>
+
+<h3>7. Disclaimers of Warranties</h3>
+
+<p>THE PRODUCTS, OFFERINGS, CONTENT AND MATERIALS ON THIS SITE ARE
+
+PROVIDED &quot;AS IS&quot; AND WITHOUT WARRANTIES OF ANY KIND, EITHER EXPRESS OR
+
+IMPLIED. WE DISCLAIM ALL WARRANTIES, EXPRESS OR IMPLIED, INCLUDING BUT
+
+NOT LIMITED TO IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
+
+PARTICULAR PURPOSE, TITLE, COMPATIBILITY, SECURITY, ACCURACY OR NON-
+
+INFRINGEMENT. Neither us, any of our affiliates, nor any of our or their respective licensors,
+
+licensees, service providers or suppliers warrant that the Site or any function contained in the
+
+Site will be uninterrupted or error-free, that defects will be corrected, or that the Site or the
+
+servers that make this site available are free of viruses or other harmful components.
+
+Any product, offering, content and material downloaded or otherwise obtained through the use
+
+of the Site is done at your sole risk and you will be solely responsible for any damage to your
+
+computer system or loss of data that results from the download of any such product, offering,
+
+content or material. NEITHER US, ANY OF OUR AFFILIATES, NOR ANY OF OUR OR
+
+THEIR RESPECTIVE LICENSORS, LICENSEES, SERVICE PROVIDERS OR SUPPLIERS
+
+WARRANT OR MAKE ANY REPRESENTATIONS REGARDING THE USE OR THE
+
+RESULTS OF THE USE OF THE PRODUCTS, OFFERINGS, CONTENT AND MATERIALS
+
+IN THIS SITE IN TERMS OF THEIR CORRECTNESS, ACCURACY, RELIABILITY, OR
+
+OTHERWISE. Furthermore, please note that no advice or information, obtained by you from
+
+our personnel or through this site, shall create any warranty not expressly provided for in this
+
+agreement.</p>
+
+<h3>8. Third-Party Website, Products, and Services</h3>
+
+<p>If 3rd parties contact you using the personal information you provided to us, we are not
+
+responsible for the content or manner of those solicitations. We are not responsible for the
+
+content, accuracy or opinions express in any third-party linked websites, and such websites
+
+are not investigated, monitored or checked for accuracy or completeness by us. Inclusion of
+
+any linked website on our Site does not imply approval or endorsement of the linked website
+
+by us. This Site and the third-party linked websites are independent entities and neither party
+
+has authority to make any representations or commitments on behalf of the other.
+
+If you decide to leave our Site and access these third-party linked sites, you do so at your own
+
+risk. You understand that we do not operate or control the products, free offerings or services
+
+offered by third-party linked websites. Third-party linked websites are responsible for all
+
+aspects of order processing, fulfillment, billing and customer service. We are not a party to
+
+any transactions entered into between you and third-party linked websites. You agree that use
+
+of such third-party linked websites is at your sole risk and is without warranties of any kind by
+
+us, expressed, implied or otherwise.</p>
+
+<h3>9. Submissions</h3>
+
+<p>All suggestions, ideas, notes, concepts and other information you may send to us (collectively,
+
+&quot;Submissions&quot;) shall be deemed and shall remain our sole property and shall not be subject to
+
+any obligation of confidence on our part. Without limiting the foregoing, we shall be deemed to
+
+own all known and hereafter existing rights of every kind and nature regarding the
+
+Submissions and shall be entitled to unrestricted use of the Submissions for any purpose,
+
+without compensation to the provider of the Submissions</p>
+
+<h3>10. Governing Law and Choice of Forum.</h3>
+
+<p>This Agreement shall be governed by and construed in accordance with the laws of the State
+
+of Massachusetts without giving effect to any conflicts-of- law principles. You agree that any
+
+action at law or in equity arising out of or relating to your use of this Site, its products, or this
+
+Agreement, whether in tort, contract, or otherwise, shall be filed only in the state or federal
+
+courts located in Massachusetts and you hereby consent and submit to the personal
+
+jurisdiction of such courts for the purposes of litigating any such action.</p>
+
+<h3>11. Section Headings.</h3>
+
+The sections headings in this Agreement are in bold and are for convenience and
+
+informational purposes only. The headings in no way alter or restrict content of the respective
+
+paragraphs they seek to describe.</p>
+
+<h3>12. General.</h3>
+
+<p>If any provision of this Agreement shall be deemed unlawful, void, or for any reason
+
+unenforceable, then that provision shall be deemed severable from these terms and shall not
+
+affect the validity and enforceability of any remaining provisions. This Agreement will inure to
+
+the benefit of our successors, assigns and licensees. The failure of either party to insist upon
+
+or enforce the strict performance of the other party with respect to any provision of this
+
+Agreement, or to exercise any right under this Agreement, will not be construed as a waiver or
+
+relinquishment to any extent of such party&#39;s right to assert or rely upon any such provision or
+
+right in that or any other instance; rather, the same will be and remain in full force and effect.
+
+Any question or concern regarding the Site or this Agreement should be directed to
+
+Joblinkd.com via email at</p>
+    </div>
+</div>
+
+<div id="results-content" style="display: none;" class="page-content">
+    <div class="container">
+        <div class="row">
+            <div class="results">
+                <div class="col-xs-12 col-sm-12 col-md-9">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div id="results_total_title" class="res-title" style="display: none;">
+                              <span id="results_total"></span> Jobs
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="res-filter">
+                                <div class="pull-right">
+                                    <div class="btn-group">
+                                        <a id="relevance_filter" type="button" class="btn btn-default active">
+                                            <span class="glyphicon glyphicon-th-list"></span> Relevance
+                                        </a>
+                                        <a id="date_filter" type="button" class="btn btn-default">
+                                            <span class="glyphicon glyphicon-calendar"></span> Date
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="jobs"></div>
+
+
+                    <nav id="paginationholder">
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="rel-searches hidden-sm hidden-xs">
+                <div class="col-sm-3">
+                    <div class="save-search">
+                        <div class="job_alert_btn_holder">
+                            <a class="btn btn-success" data-toggle="modal" data-target="#subscription">Get Job Alerts</a>
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+        </div>
+    </div>
+</div>
+
+<!-- Footer -->
+<footer>
+    <div class="container-fluid gray-footer">
+        <div class="row">
+            <div class="col-lg-12">
+                <ul class="list-inline">
+                    <li>
+                        <a href="#">Terms of Use</a>
+                    </li>
+                    <li class="footer-menu-divider">&sdot;</li>
+                    <li>
+                        <a href="#about">Privacy Policy</a>
+                    </li>
+                    <li class="footer-menu-divider">&sdot;</li>
+                    <li>
+                        <a href="#services">Contact Us</a>
+                    </li>
+                    <li class="footer-menu-divider">&sdot;</li>
+                    <li>
+                        <a href="#contact">Member Login</a>
+                    </li>
+                </ul>
+                <p class="copyright text-muted small">Copyright &copy;. All Rights Reserved</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="assets/js/jquery.js"></script>
+<script src="http://ajax.microsoft.com/ajax/jquery.templates/beta1/jquery.tmpl.min.js"></script>
+<script src="assets/js/url.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="assets/js/bootstrap.min.js"></script>
+<script src="http://underscorejs.org/underscore-min.js"></script>
+<script src="assets/js/jquery.twbsPagination.min.js"></script>
+<script type="text/JavaScript" src="http://api.Jobs2Careers.com/api/j2c.js"></script>
+
+<!-- Application -->
+<script src="assets/js/app.js"></script>
+
+</body>
+
+</html>
