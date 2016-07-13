@@ -1,5 +1,9 @@
 # Nginx Configs SPA: #
 
+
+```
+#!json
+
 server {
   listen 80;
   server_name {{SERVER_NAME}};
@@ -11,3 +15,4 @@ server {
       try_files $uri /index.html /assets =404;
   }
 }
+```
