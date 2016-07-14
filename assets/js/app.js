@@ -63,7 +63,7 @@ var app = {
     var self = this;
 
     function validateInputs(parent,self){
-      if($('#'+parent+' input[name="query"]').val().length > 0 || 
+      if($('#'+parent+' input[name="query"]').val().length > 0 ||
               $('#'+parent+' input[name="location"]').val().length > 0){
         self.searchParams.start = 1;
         self.searchParams.sort = 'r';
@@ -89,7 +89,6 @@ var app = {
     $('#search-form, #search-form-top').on('keypress', function(e) {
       var code = e.keyCode || e.which;
       if(code == 13) {
-        console.log()
         if($(this).attr('id') === 'search-form'){
           validateInputs('search-form', self)
         }
@@ -131,7 +130,7 @@ var app = {
             if(self.searchParams[param] && self.searchParams[param] != '') {
               data[param] = self.searchParams[param];
             } else {
-              data[param] = urlParams[param];
+              //data[param] = urlParams[param];
             }
           });
         } else {
@@ -142,7 +141,11 @@ var app = {
               data[param] = self.searchParams[param];
             }
           });
+          self.searchParams= data;
         }
+
+        $('input[name="query"]').val(data.q);
+        $('input[name="location"]').val(data.l);
 
         if(!jQuery.isEmptyObject(data)) {
           if(data.sort == 'd') {
@@ -207,6 +210,25 @@ var app = {
       self.render('/results', true);
     });
   },
+  breadcrumbsBind: function() {
+    var self = this;
+    $('#breadcrumbs_query_jobs').unbind();
+
+    if(self.searchParams.l != '' && self.searchParams.q != '') {
+      $('#breadcrumbs_query_jobs').text(self.searchParams.q + ' Jobs');
+      $('#breadcrumbs_location_jobs').text(self.searchParams.q + ' Jobs in ' + self.searchParams.l);
+      $('.breadcrumbs-list').show();
+    } else {
+      $('.breadcrumbs-list').hide();
+    }
+
+    $('#breadcrumbs_query_jobs').on('click', function(e) {
+      e.preventDefault();
+      self.searchParams.l = '';
+      $('.breadcrumbs-list').hide();
+      self.render('/results', true);
+    });
+  },
   search: function(data) {
     var self = this;
     apiUrl = 'http://api.jobs2careers.com/api/search.php';
@@ -224,6 +246,7 @@ var app = {
       });
       self.preparePagination();
       self.updateResultsTotal();
+      self.breadcrumbsBind();
       $('.loader').hide();
       $('footer').show();
     }, 'json');
@@ -240,30 +263,3 @@ $(function() {
   app.init();
 
 });
-
-
-
-
- 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
