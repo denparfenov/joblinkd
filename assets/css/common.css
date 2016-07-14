@@ -366,3 +366,67 @@ blockquote {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
 }
+
+.validation-hint{
+    background-color: #fff;
+    padding: 12px 16px;
+    margin: 12px 0 0 0;
+    float: left;
+    color: #f02828;
+    display: none;
+}
+#search-form-top .validation-hint{
+    font-size: 12px;
+    padding: 6px 12px;
+    margin: 0 0 0 10px;
+}
+.validation-hint.active{
+    display: block;
+}
+
+.popout {
+    animation: popout 150ms ease;
+    -webkit-animation: popout 150ms ease;
+    display: block;
+}
+
+@keyframes popout {
+    from{transform:scale(0)}
+    80%{transform:scale(1.2)}
+    to{transform:scale(1)}
+}
+
+@-webkit-keyframes popout {
+    from{-webkit-transform:scale(0)}
+    80%{-webkit-transform:scale(1.2)}
+    to{-webkit-transform:scale(1)}
+}
+.breadcrumbs-list{
+    padding: 0;
+    margin-left: 15px;
+}
+.breadcrumbs-list li{
+    list-style-type: none;
+    display: inline-block;
+    vertical-align: middle;
+}
+.breadcrumbs-list li,
+.breadcrumbs-list a{
+    font-size: 12px;
+    color: #acacac;
+}
+.breadcrumbs-list a:hover{
+    color: #00A9CC;
+}
+.breadcrumbs-list li:after{
+    content: '→';
+    vertical-align: 1px;
+    margin: 0 5px 0 6px;
+    font-size: 10px;
+}
+.breadcrumbs-list li:last-child:after{
+    display: none;
+}
+.dropdown-menu .input-group{
+    padding: 8px 12px 8px 18px;
+}

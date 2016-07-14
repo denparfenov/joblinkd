@@ -61,18 +61,41 @@ var app = {
   },
   searchBind: function() {
     var self = this;
+
+    function validateInputs(parent,self){
+      if($('#'+parent+' input[name="query"]').val().length > 0 || 
+              $('#'+parent+' input[name="location"]').val().length > 0){
+        self.searchParams.start = 1;
+        self.searchParams.sort = 'r';
+        self.render('/results', true);
+        $('#'+parent+' .validation-hint').removeClass('active');
+      } else {
+        $('#'+parent+' .validation-hint').addClass('popout active');
+        setTimeout(function() {
+          $('#'+parent+' .validation-hint').removeClass('popout');
+        }, 150);
+      }
+    }
+
     $('#search-btn, #search-btn a').on('click', function(e) {
       e.preventDefault();
-      self.searchParams.start = 1;
-      self.searchParams.sort = 'r';
-      self.render('/results', true);
+      if($(this).parents('#search-form').length){
+        validateInputs('search-form', self)
+      }
+      if($(this).parents('#search-form-top').length){
+        validateInputs('search-form-top', self)
+      }
     });
     $('#search-form, #search-form-top').on('keypress', function(e) {
       var code = e.keyCode || e.which;
       if(code == 13) {
-        self.searchParams.start = 1;
-        self.searchParams.sort = 'r';
-        self.render('/results', true);
+        console.log()
+        if($(this).attr('id') === 'search-form'){
+          validateInputs('search-form', self)
+        }
+        if($(this).attr('id') === 'search-form-top'){
+          validateInputs('search-form-top', self)
+        }
       }
     });
   },
@@ -215,4 +238,32 @@ var app = {
 
 $(function() {
   app.init();
+
 });
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
