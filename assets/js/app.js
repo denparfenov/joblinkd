@@ -149,20 +149,22 @@ var app = {
   renderTermsPage: function() {
     var self = this;
     $('#intro, #simple-nav, #index-content, #results-content').hide();
-    $('#base-nav, #terms-content').show();
+    $('#base-nav, #terms-content, footer').show();
   },
   renderIndexPage: function() {
     $('#base-nav, #results-content, #terms-content').hide();
-    $('#intro, #simple-nav, #index-content').show();
+    $('#intro, #simple-nav, #index-content, footer').show();
   },
   renderResultsPage: function(data) {
     var self = this;
-    $('#intro, #simple-nav, #index-content, #terms-content').hide();
+    $('#intro, #simple-nav, #index-content, #terms-content, footer').hide();
     $('#base-nav, #results-content').show();
     self.search(data);
   },
   updateResultsTotal: function() {
-    $('#results_total').text(this.results.total);
+    $('#results_total').text(
+      this.results.total.toString().split(/(?=(?:\d{3})+(?!\d))/).join(' ')
+    );
     $('#results_total_title').show();
   },
   resultsFilterBind: function() {
@@ -186,7 +188,8 @@ var app = {
     var self = this;
     apiUrl = 'http://api.jobs2careers.com/api/search.php';
 
-    $('#results_total_title').hide();
+    $('#results_total_title, footer').hide();
+    $('.loader').show();
     $('#pagination').html('');
     $('#jobs').html('');
     $.template('jobsTmpl', $('#jobsTmpl').html());
@@ -198,6 +201,8 @@ var app = {
       });
       self.preparePagination();
       self.updateResultsTotal();
+      $('.loader').hide();
+      $('footer').show();
     }, 'json');
   },
   init: function() {
