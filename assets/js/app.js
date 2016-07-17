@@ -10,6 +10,7 @@ var app = {
     format: 'json',
     q: '',
     l: '',
+    location: '',
     start: 1,
     sort: 'r',
     Limit: 10
@@ -56,9 +57,17 @@ var app = {
       self.searchParams.q = $(this).val();
     });
 
+    $('input[name="location"]').on('change, keyup, input', function() {
+      self.searchParams.location = $(this).val();
+    });
+
     $('input[name="location"]').geocomplete({
       types: ['(cities)'],
-    }).bind("geocode:result", function(event, result){
+      language: 'en'
+    }).bind("geocode:result", function(event, result) {
+      if(!result.name) {
+        return;
+      }
       $('input[name="location"]').val(result.name);
       self.searchParams.l = result.name;
     });
@@ -126,6 +135,11 @@ var app = {
 
     switch(page) {
       case '/results':
+      
+        if(self.searchParams.l == '' && self.searchParams.location != '') {
+          self.searchParams.l = self.searchParams.location;
+        }
+
         if(paramsFirst) {
           _.each(self.allowedParams, function(param) {
             if(!self.searchParams[param] && !urlParams[param]) {
@@ -145,10 +159,11 @@ var app = {
               data[param] = self.searchParams[param];
             }
           });
-          self.searchParams= data;
+          self.searchParams = data;
         }
 
         $('input[name="query"]').val(data.q);
+        console.log(data.l);
         $('input[name="location"]').val(data.l);
 
         if(!jQuery.isEmptyObject(data)) {
