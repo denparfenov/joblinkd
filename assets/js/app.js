@@ -55,8 +55,12 @@ var app = {
     $('input[name="query"]').on('change, keyup, input', function() {
       self.searchParams.q = $(this).val();
     });
-    $('input[name="location"]').on('change, keyup, input', function() {
-      self.searchParams.l = $(this).val();
+
+    $('input[name="location"]').geocomplete({
+      types: ['(cities)'],
+    }).bind("geocode:result", function(event, result){
+      $('input[name="location"]').val(result.name);
+      self.searchParams.l = result.name;
     });
   },
   searchBind: function() {
@@ -261,5 +265,4 @@ var app = {
 
 $(function() {
   app.init();
-
 });
