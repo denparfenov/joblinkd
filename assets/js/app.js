@@ -128,58 +128,20 @@ var app = {
     return str
   },
   render: function(page, paramsFirst, changeState) {
-    var self = this, data = {}, urlParams = url('?') || {};
+    var self = this;
 
     paramsFirst = paramsFirst || false;
     changeState = changeState || false;
 
     switch(page) {
       case '/results':
-      
-        if(self.searchParams.l == '' && self.searchParams.location != '') {
-          self.searchParams.l = self.searchParams.location;
-        }
-
-        if(paramsFirst) {
-          _.each(self.allowedParams, function(param) {
-            if(!self.searchParams[param] && !urlParams[param]) {
-              return;
-            }
-            if(self.searchParams[param] && self.searchParams[param] != '') {
-              data[param] = self.searchParams[param];
-            } else {
-              //data[param] = urlParams[param];
-            }
-          });
-        } else {
-          _.each(self.allowedParams, function(param) {
-            if(urlParams[param] && urlParams[param] != '') {
-              data[param] = urlParams[param];
-            } else {
-              data[param] = self.searchParams[param];
-            }
-          });
-          self.searchParams = data;
-        }
-
-        $('input[name="query"]').val(data.q);
-        console.log(data.l);
-        $('input[name="location"]').val(data.l);
-
-        if(!jQuery.isEmptyObject(data)) {
-          if(data.sort == 'd') {
-            self.searchParams.sort = 'd';
-            $('#relevance_filter').removeClass('active');
-            $('#date_filter').addClass('active');
-          } else if (data.sort == 'r') {
-            self.searchParams.sort = 'r';
-            $('#date_filter').removeClass('active');
-            $('#relevance_filter').addClass('active');
-          }
-          page = page + '?' + self.prepareSearchParams(data);
-        }
-
-        this.renderResultsPage(data);
+        page = this.renderResultsPage(paramsFirst, changeState);
+        break;
+      case '/contacts':
+        this.renderContactsPage();
+        break;
+      case '/privacy':
+        this.renderPrivacyPage();
         break;
       case '/terms':
         this.renderTermsPage();
@@ -191,18 +153,77 @@ var app = {
       window.history.pushState({}, 'Search for a Jobs', page);
     }
   },
+  renderPrivacyPage: function() {
+    var self = this;
+    $('#intro, #simple-nav, #index-content, #results-content, ' +
+      '#terms-content, #contacts-content').hide();
+    $('#base-nav, #privacy-content, footer').show();
+  },
+  renderContactsPage: function() {
+    var self = this;
+    $('#intro, #simple-nav, #index-content, #results-content, ' +
+      '#terms-content, #privacy-content').hide();
+    $('#base-nav, #contacts-content, footer').show();
+  },
   renderTermsPage: function() {
     var self = this;
-    $('#intro, #simple-nav, #index-content, #results-content').hide();
+    $('#intro, #simple-nav, #index-content, #results-content, ' +
+      '#contacts-content, #privacy-content').hide();
     $('#base-nav, #terms-content, footer').show();
   },
   renderIndexPage: function() {
-    $('#base-nav, #results-content, #terms-content').hide();
+    $('#base-nav, #results-content, #terms-content, ' +
+      '#contacts-content, #privacy-content').hide();
     $('#intro, #simple-nav, #index-content, footer').show();
   },
-  renderResultsPage: function(data) {
-    var self = this;
-    $('#intro, #simple-nav, #index-content, #terms-content, footer').hide();
+  renderResultsPage: function(paramsFirst, changeState) {
+    var self = this,
+      data = {},
+      page = '/results',
+      urlParams = url('?') || {};
+
+    if(self.searchParams.l == '' && self.searchParams.location != '') {
+      self.searchParams.l = self.searchParams.location;
+    }
+
+    if(paramsFirst) {
+      _.each(self.allowedParams, function(param) {
+        if(!self.searchParams[param] && !urlParams[param]) {
+          return;
+        }
+        if(self.searchParams[param] && self.searchParams[param] != '') {
+          data[param] = self.searchParams[param];
+        }
+      });
+    } else {
+      _.each(self.allowedParams, function(param) {
+        if(urlParams[param] && urlParams[param] != '') {
+          data[param] = urlParams[param];
+        } else {
+          data[param] = self.searchParams[param];
+        }
+      });
+      self.searchParams = data;
+    }
+
+    $('input[name="query"]').val(data.q);
+    $('input[name="location"]').val(data.l);
+
+    if(!jQuery.isEmptyObject(data)) {
+      if(data.sort == 'd') {
+        self.searchParams.sort = 'd';
+        $('#relevance_filter').removeClass('active');
+        $('#date_filter').addClass('active');
+      } else if (data.sort == 'r') {
+        self.searchParams.sort = 'r';
+        $('#date_filter').removeClass('active');
+        $('#relevance_filter').addClass('active');
+      }
+      page = page + '?' + self.prepareSearchParams(data);
+    }
+
+    $('#intro, #simple-nav, #index-content, #terms-content, ' +
+      '#contacts-content, #privacy-content, footer').hide();
     $('#base-nav, #results-content').show();
     self.search(data);
   },
