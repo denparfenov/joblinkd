@@ -226,6 +226,8 @@ var app = {
       '#contacts-content, #privacy-content, footer').hide();
     $('#base-nav, #results-content').show();
     self.search(data);
+
+    return page;
   },
   updateResultsTotal: function() {
     $('#results_total').text(
