@@ -32,6 +32,54 @@ var app = {
       }, 0);
     });
   },
+  getLocation: function() {
+    var self = this;
+
+    if('localStorage' in window && window['localStorage'] !== null) {
+      if(localStorage.getItem('currentCity')) {
+        self.setCurrentCity(localStorage.getItem('currentCity'));
+        return;
+      }
+    }
+
+    if(!navigator.geolocation) {
+      return;
+    }
+
+    navigator.geolocation.getCurrentPosition(function(position) {
+      var lat = position.coords.latitude,
+        lng = position.coords.longitude,
+        location = lat + ',' + lng;
+      self.setDefaultLocation(location);
+    });
+
+    //this.setDefaultLocation('-33.8670522,151.1957362');
+  },
+  setCurrentCity: function(city) {
+    $('#currentCity').html(city);
+    localStorage.setItem('currentCity', city);
+    this.searchParams.l = city;
+    $('input[name="location"]').val(city);
+  },
+  setDefaultLocation: function(location) {
+    location = location || false;
+    var self = this;
+
+    $.get('https://maps.googleapis.com/maps/api/place/nearbysearch/json?' +
+      'key=AIzaSyAObCZKp4xztGsI5EFr1KzmsF04J65tVSQ&language=en' +
+      '&types=(cities)&location=' + location,
+      function(response) {
+        var currentLocation = url('?l');
+        if(currentLocation) {
+          self.setCurrentCity(currentLocation);
+          return;
+        }
+        if(response.results.length == 0) { return; }
+
+        self.setCurrentCity(response.results[0].name);
+      },
+      'json');
+  },
   preparePagination: function() {
     var pages = Math.ceil(this.results.total / this.results.count)
       startPage = parseInt(this.results.start),
@@ -258,7 +306,9 @@ var app = {
 
     if(self.searchParams.l != '' && self.searchParams.q != '') {
       $('#breadcrumbs_query_jobs').text(self.searchParams.q + ' Jobs');
-      $('#breadcrumbs_location_jobs').text(self.searchParams.q + ' Jobs in ' + self.searchParams.l);
+      $('#breadcrumbs_location_jobs').text(
+        self.searchParams.q + ' Jobs in ' + self.searchParams.l
+      );
       $('.breadcrumbs-list').show();
     } else {
       $('.breadcrumbs-list').hide();
@@ -298,6 +348,7 @@ var app = {
     this.searchBind();
     this.queryFieldBind();
     this.resultsFilterBind();
+    this.getLocation();
   }
 };
 
