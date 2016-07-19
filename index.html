@@ -89,11 +89,11 @@
                                                       </span>
                                                     </div>
                                                 </li>
-                                                <li><a href="#">Action</a></li>
+                                                <!-- <li><a href="#">Action</a></li>
                                                 <li><a href="#">Another action</a></li>
                                                 <li><a href="#">Something else here</a></li>
                                                 <li role="separator" class="divider"></li>
-                                                <li><a href="#">Separated link</a></li>
+                                                <li><a href="#">Separated link</a></li> -->
                                               </ul>
                                         </div>
                                     </li>
@@ -104,15 +104,18 @@
                                                 <span class="caret"></span>
                                             </a>
                                               <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                                <li><a href="#">Action</a></li>
-                                                <li><a href="#">Another action</a></li>
-                                                <li><a href="#">Something else here</a></li>
-                                                <li role="separator" class="divider"></li>
-                                                <li><a href="#">Separated link</a></li>
+                                                <li><a href="/results?q=account">Account Jobs</a></li>
+                                                <li><a href="/results?q=construction">Construction Jobs</a></li>
+                                                <li><a href="/results?q=customer service">Customer Service Jobs</a></li>
+                                                <li><a href="/results?q=education">Education Jobs</a></li>
+                                                <li><a href="/results?q=entry level">Entry Level Jobs</a></li>
+                                                <li><a href="/results?q=nursing">Nursing Jobs</a></li>
+                                                <li><a href="/results?q=sales">Sales Jobs</a></li>
+                                                <li><a href="/results?q=truck driver">Truck Driver Jobs</a></li>
                                               </ul>
                                         </div>
                                     </li>
-                                    <li>
+                                    <!-- <li>
                                         <div class="dropdown">
                                             <a href="#" class="navbar-a dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                                                 Advise
@@ -126,23 +129,13 @@
                                                 <li><a href="#">Separated link</a></li>
                                               </ul>
                                         </div>
-                                    </li>
+                                    </li> -->
                                 </ul>
                                 <ul class="nav navbar-nav pull-right hidden-xs hidden-sm">
                                     <li>
-                                        <div class="dropdown">
-                                            <a href="#" class="navbar-a dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                                Recent Searches
-                                                <span class="caret"></span>
-                                            </a>
-                                              <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                                <li><a href="#">Action</a></li>
-                                                <li><a href="#">Another action</a></li>
-                                                <li><a href="#">Something else here</a></li>
-                                                <li role="separator" class="divider"></li>
-                                                <li><a href="#">Separated link</a></li>
-                                              </ul>
-                                        </div>
+                                      <div class="job_alert_btn_holder">
+                                          <a href="#" id="get-job-alerts" class="btn btn-success" data-toggle="modal" data-target="#subscription">Get Job Alerts</a>
+                                      </div>
                                     </li>
                                 </ul>
 
@@ -156,6 +149,7 @@
         </div>
         <!-- /.container -->
     </nav>
+
 
     <nav id="base-nav" style="display: none;" class="navbar navbar-inverse navbar-green navbar-fixed-top" role="navigation">
         <div class="container">
@@ -224,7 +218,7 @@
                             <div class="col-xs-12 col-md-8 col-md-offset-2">
                             	<div class="search-bar">
                                 <ul class="hidden-xs nav nav-tabs" role="tablist">
-                                    <li role="presentation" class="tab1 active">
+                                    <li id="jobs-tab" role="presentation" class="tab1 active">
                                         <a href="#all" aria-controls="all" role="tab" data-toggle="tab" aria-expanded="true">Jobs <span></span> <span class="add"></span>
                                     </a>
                                     </li>
@@ -368,19 +362,8 @@
   </div>
 </div>
 
-<div id="contacts-content" class="page-content" style="display: none;">
+<div id="advertise-content" class="page-content" style="display: none;">
   <div class="container">
-    <h2>About Us</h2>
-    <p>
-      We’re a tech company focused on making online job searches better. We search the other job sites, and show you all the information you need to make the best job search decisions.
-    </p>
-    <p>
-      And because our tech team is constantly looking for ways to searching for jobs even easier, we offer a variety of tools and features such as email alerts and localized search results.
-    </p>
-    <p>
-      Joblinkd. is an subsidiary of Thryve Media Group.
-    </p>
-
     <h2>Advertise With Us</h2>
     <p>
       Use the email below to reach our Sales team with any questions you may have.<br>
@@ -391,6 +374,21 @@
     <p>
       Use the contact email below to reach our team with any questions you may have.<br>
       <a href="mailto:info@joblinkd.com">info@joblinkd.com</a>
+    </p>
+  </div>
+</div>
+
+<div id="about-content" class="page-content" style="display: none;">
+  <div class="container">
+    <h2>About Us</h2>
+    <p>
+      We’re a tech company focused on making online job searches better. We search the other job sites, and show you all the information you need to make the best job search decisions.
+    </p>
+    <p>
+      And because our tech team is constantly looking for ways to searching for jobs even easier, we offer a variety of tools and features such as email alerts and localized search results.
+    </p>
+    <p>
+      Joblinkd. is an subsidiary of Thryve Media Group.
     </p>
   </div>
 </div>
@@ -592,6 +590,7 @@
                 <ul class="breadcrumbs-list" style="display: none;">
                     <li><a href="/">Home</a></li>
                     <li><a href="#" id="breadcrumbs_query_jobs"></a></li>
+                    <li style="display: none;"><a href="#" id="breadcrumbs_state_jobs"></a></li>
                     <li><a id="breadcrumbs_location_jobs"></a></li>
                 </ul>
                 <div class="col-xs-12 col-sm-12 col-md-9">
@@ -615,6 +614,12 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
+
+                    <div id="fail-results" style="display: none;" class="row">
+                      <p>
+                        According to this request, nothing found..
+                      </p>
                     </div>
 
                     <div class="row">
@@ -655,7 +660,11 @@
                     </li>
                     <li class="footer-menu-divider">&sdot;</li>
                     <li>
-                        <a href="/contacts">Contact Us</a>
+                        <a href="/advertise">Advertise Us</a>
+                    </li>
+                    <li class="footer-menu-divider">&sdot;</li>
+                    <li>
+                        <a href="/about">About Us</a>
                     </li>
                 </ul>
                 <p class="copyright text-muted small">Copyright &copy;. All Rights Reserved</p>
@@ -667,6 +676,8 @@
 <!-- jQuery -->
 <script src="assets/js/jquery.js"></script>
 <script src="http://ajax.microsoft.com/ajax/jquery.templates/beta1/jquery.tmpl.min.js"></script>
+<script src="assets/js/geoPosition.js"></script>
+
 <script src="assets/js/url.min.js"></script>
 
 <script src="http://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyAObCZKp4xztGsI5EFr1KzmsF04J65tVSQ&language=en"></script>
@@ -677,7 +688,7 @@
 <script src="http://underscorejs.org/underscore-min.js"></script>
 <script src="assets/js/jquery.twbsPagination.min.js"></script>
 <script type="text/JavaScript" src="http://api.Jobs2Careers.com/api/j2c.js"></script>
-
+<script type="text/javascript" src="//s3.amazonaws.com/downloads.mailchimp.com/js/signup-forms/popup/embed.js" data-dojo-config="usePlainJson: true, isDebug: false"></script>
 <!-- Application -->
 <script src="assets/js/app.js"></script>
 

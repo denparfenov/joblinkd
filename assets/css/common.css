@@ -25,7 +25,7 @@ h2>span {
     padding-top: 60px; /* If you're making other pages, make sure there is 50px of padding to make sure the navbar doesn't overlap content! */
     padding-bottom: 50px;
     color: #f8f8f8;
-    background: url(../img/bridge2.jpg) no-repeat center center;
+    background: url(../img/newbg.jpg) no-repeat center center;
     background-size: cover;
     height: 100%;
     text-align: center;
@@ -420,7 +420,7 @@ blockquote {
     color: #00A9CC;
 }
 .breadcrumbs-list li:after{
-    content: '→';
+    content: "\2192";
     vertical-align: 1px;
     margin: 0 5px 0 6px;
     font-size: 10px;
@@ -433,4 +433,19 @@ blockquote {
 }
 .pac-container{
   z-index: 99999;
+}
+
+#jobs-tab a:hover, #jobs-tab a:focus, #jobs-tab a:visited{
+  border: 0 !important;
+  color: #fff !important;
+  background-color: #80aa37 !important;
+}
+
+.mc-modal{
+  z-index: 99999 !important;
+  top: 25% !important;
+}
+
+#search-btn{
+  cursor: pointer;
 }

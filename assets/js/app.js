@@ -42,16 +42,14 @@ var app = {
       }
     }
 
-    if(!navigator.geolocation) {
-      return;
+    if(geoPosition.init()) {
+      geoPosition.getCurrentPosition(function(position) {
+        var lat = position.coords.latitude,
+          lng = position.coords.longitude,
+          location = lat + ',' + lng;
+        self.setDefaultLocation(location);
+      }, function(error) { console.log(error); }, {timeout: 10000});
     }
-
-    navigator.geolocation.getCurrentPosition(function(position) {
-      var lat = position.coords.latitude,
-        lng = position.coords.longitude,
-        location = lat + ',' + lng;
-      self.setDefaultLocation(location);
-    });
 
     //this.setDefaultLocation('-33.8670522,151.1957362');
   },
@@ -110,14 +108,50 @@ var app = {
     });
 
     $('input[name="location"]').geocomplete({
+      country: 'usa',
       types: ['(cities)'],
       language: 'en'
     }).bind("geocode:result", function(event, result) {
-      if(!result.name) {
+      if(!result) {
         return;
       }
-      $('input[name="location"]').val(result.name);
-      self.searchParams.l = result.name;
+
+      var place = {
+        country: null,
+        city: null,
+        state: null
+      };
+
+      _.each(result.address_components, function(component) {
+        if(!place.country) {
+          index = _.indexOf(component.types, 'country');
+          if(index != -1) {
+            place.country = component.long_name;
+          }
+        }
+
+        if(!place.city) {
+          index = _.indexOf(component.types, 'locality')
+          if(index != -1) {
+            place.city = component.long_name;
+          }
+        }
+
+        if(!place.state) {
+          index = _.indexOf(component.types, 'administrative_area_level_1')
+          if(index != -1) {
+            place.state = component.long_name;
+          }
+        }
+      });
+
+      var locationName = place.city;
+      if (place.state) {
+        locationName += ', ' + place.state;
+      }
+
+      $('input[name="location"]').val(locationName);
+      self.searchParams.l = locationName;
     });
   },
   searchBind: function() {
@@ -185,8 +219,11 @@ var app = {
       case '/results':
         page = this.renderResultsPage(paramsFirst, changeState);
         break;
-      case '/contacts':
-        this.renderContactsPage();
+      case '/advertise':
+        this.renderAdvertisePage();
+        break;
+      case '/about':
+        this.renderAboutPage();
         break;
       case '/privacy':
         this.renderPrivacyPage();
@@ -204,24 +241,30 @@ var app = {
   renderPrivacyPage: function() {
     var self = this;
     $('#intro, #simple-nav, #index-content, #results-content, ' +
-      '#terms-content, #contacts-content').hide();
+      '#terms-content, #about-content, #advertise-content').hide();
     $('#base-nav, #privacy-content, footer').show();
   },
-  renderContactsPage: function() {
+  renderAdvertisePage: function() {
     var self = this;
     $('#intro, #simple-nav, #index-content, #results-content, ' +
-      '#terms-content, #privacy-content').hide();
-    $('#base-nav, #contacts-content, footer').show();
+      '#terms-content, #privacy-content, #about-content').hide();
+    $('#base-nav, #advertise-content, footer').show();
+  },
+  renderAboutPage: function() {
+    var self = this;
+    $('#intro, #simple-nav, #index-content, #results-content, ' +
+      '#terms-content, #privacy-content, #advertise-content').hide();
+    $('#base-nav, #about-content, footer').show();
   },
   renderTermsPage: function() {
     var self = this;
     $('#intro, #simple-nav, #index-content, #results-content, ' +
-      '#contacts-content, #privacy-content').hide();
+      '#about-content, #privacy-content, #advertise-content').hide();
     $('#base-nav, #terms-content, footer').show();
   },
   renderIndexPage: function() {
     $('#base-nav, #results-content, #terms-content, ' +
-      '#contacts-content, #privacy-content').hide();
+      '#about-content, #privacy-content, #advertise-content').hide();
     $('#intro, #simple-nav, #index-content, footer').show();
   },
   renderResultsPage: function(paramsFirst, changeState) {
@@ -271,7 +314,7 @@ var app = {
     }
 
     $('#intro, #simple-nav, #index-content, #terms-content, ' +
-      '#contacts-content, #privacy-content, footer').hide();
+      '#about-content, #privacy-content, #advertise-content, footer').hide();
     $('#base-nav, #results-content').show();
     self.search(data);
 
@@ -302,7 +345,7 @@ var app = {
   },
   breadcrumbsBind: function() {
     var self = this;
-    $('#breadcrumbs_query_jobs').unbind();
+    $('#breadcrumbs_query_jobs, #breadcrumbs_state_jobs').unbind();
 
     if(self.searchParams.l != '' && self.searchParams.q != '') {
       $('#breadcrumbs_query_jobs').text(self.searchParams.q + ' Jobs');
@@ -314,9 +357,31 @@ var app = {
       $('.breadcrumbs-list').hide();
     }
 
+    if( self.searchParams.l &&  self.searchParams.l != '') {
+      var locationParts = self.searchParams.l.split(', ');
+      if(locationParts.length == 2) {
+        $('#breadcrumbs_state_jobs').text(
+          self.searchParams.q + ' Jobs in ' + locationParts[1]
+        );
+
+        $('#breadcrumbs_state_jobs').parent('li').show();
+
+        $('#breadcrumbs_state_jobs').on('click', function(e) {
+          e.preventDefault();
+          self.searchParams.l = locationParts[1];
+          self.render('/results', true);
+        });
+      } else {
+        $('#breadcrumbs_state_jobs').parent('li').hide();
+      }
+    } else {
+      $('#breadcrumbs_state_jobs').parent('li').hide();
+    }
+
     $('#breadcrumbs_query_jobs').on('click', function(e) {
       e.preventDefault();
       self.searchParams.l = '';
+      self.searchParams.location = '';
       $('.breadcrumbs-list').hide();
       self.render('/results', true);
     });
@@ -330,18 +395,51 @@ var app = {
     $('#pagination').html('');
     $('#jobs').html('');
     $.template('jobsTmpl', $('#jobsTmpl').html());
-    $.get(apiUrl, data, function(response) {
-      self.results = response;
-      _.each(self.results.jobs, function(job) {
-        job.description = $('<p>' + job.description + '</p>').text();
-        $.tmpl('jobsTmpl', job).appendTo('#jobs');
-      });
-      self.preparePagination();
-      self.updateResultsTotal();
-      self.breadcrumbsBind();
+    $.get(
+      apiUrl,
+      data,
+      function(response) {
+        self.results = response;
+
+        if(response.total == 0 || response.count == 0) {
+          $('#fail-results').show();
+          $('.loader').hide();
+          return;
+        }
+
+        _.each(self.results.jobs, function(job) {
+          job.description = $('<p>' + job.description + '</p>').text();
+          $.tmpl('jobsTmpl', job).appendTo('#jobs');
+        });
+        self.preparePagination();
+        self.updateResultsTotal();
+        self.breadcrumbsBind();
+        $('.loader, #fail-results').hide();
+        $('footer').show();
+      },
+      'json'
+    )
+    .fail(function() {
+      $('#fail-results').show();
       $('.loader').hide();
-      $('footer').show();
-    }, 'json');
+    });
+  },
+  jobAlertsBind: function() {
+    $('#get-job-alerts').on('click', function(e) {
+      e.preventDefault();
+      document.cookie =
+        'MCEvilPopupClosed=;path=/;expires=Thu, 01 Jan 1970 00:00:00 UTC;';
+      require(
+        ["mojo/signup-forms/Loader"],
+        function(L) {
+          L.start({
+            "baseUrl": "mc.us13.list-manage.com",
+            "uuid": "a1ec6237ba8ad187e887dc2e8",
+            "lid": "166e09695b"
+          })
+        }
+      );
+    });
   },
   init: function() {
     this.locationBind();
@@ -349,6 +447,7 @@ var app = {
     this.queryFieldBind();
     this.resultsFilterBind();
     this.getLocation();
+    this.jobAlertsBind();
   }
 };
 
