@@ -425,7 +425,7 @@ var app = {
     });
   },
   jobAlertsBind: function() {
-    $('#get-job-alerts').on('click', function(e) {
+    $('.get-job-alerts').on('click', function(e) {
       e.preventDefault();
       document.cookie =
         'MCEvilPopupClosed=;path=/;expires=Thu, 01 Jan 1970 00:00:00 UTC;';
