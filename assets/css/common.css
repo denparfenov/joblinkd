@@ -112,7 +112,7 @@ label {
 
 .navbar-fixed-top .nav {
     padding-top: 10px;
-    padding-bottom: 15px;
+    padding-bottom: 10px;
 }
 
 .navbar-fixed-top .navbar-brand {
@@ -323,6 +323,7 @@ li .btn-sm {
 .logo-brand img {
     width: 188px;
     margin-top: 8px;
+    padding-bottom: 20px;
 }
 
 .list-job {
