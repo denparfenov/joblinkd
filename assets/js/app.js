@@ -78,7 +78,7 @@ var app = {
       }
       if(places.length == 0) { return; }
 
-      self.setCurrentCity(response.results[0].name);
+      self.setCurrentCity(places[0].name);
     });
 
   },
