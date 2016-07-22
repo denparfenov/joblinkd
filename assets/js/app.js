@@ -107,7 +107,7 @@ var app = {
     });
 
     $('input[name="location"]').on('change, keyup, input', function() {
-      self.searchParams.location = $(this).val();
+      self.searchParams.l = $(this).val();
     });
 
     $('input[name="location"]').geocomplete({
