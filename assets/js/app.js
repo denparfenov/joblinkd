@@ -50,8 +50,6 @@ var app = {
         self.setDefaultLocation(location);
       }, function(error) { console.log(error); }, {timeout: 10000});
     }
-
-    //this.setDefaultLocation('-33.8670522,151.1957362');
   },
   setCurrentCity: function(city) {
     $('#currentCity').html(city);
@@ -69,6 +67,7 @@ var app = {
     service.nearbySearch({
       location: location,
       types: ['(cities)'],
+      language: 'en',
       radius: 500
     }, function(places) {
       var currentLocation = url('?l');
