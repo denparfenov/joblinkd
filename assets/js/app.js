@@ -63,20 +63,23 @@ var app = {
     location = location || false;
     var self = this;
 
-    $.get('https://maps.googleapis.com/maps/api/place/nearbysearch/json?' +
-      'key=AIzaSyAObCZKp4xztGsI5EFr1KzmsF04J65tVSQ&language=en' +
-      '&types=(cities)&location=' + location,
-      function(response) {
-        var currentLocation = url('?l');
-        if(currentLocation) {
-          self.setCurrentCity(currentLocation);
-          return;
-        }
-        if(response.results.length == 0) { return; }
+    var service =
+      new google.maps.places.PlacesService(document.getElemenetById('map'));
 
-        self.setCurrentCity(response.results[0].name);
-      },
-      'json');
+    service.nearbySearch({
+      location: location,
+      types: ['(cities)']
+    }, function(places) {
+      var currentLocation = url('?l');
+      if(currentLocation) {
+        self.setCurrentCity(currentLocation);
+        return;
+      }
+      if(places.length == 0) { return; }
+
+      self.setCurrentCity(response.results[0].name);
+    });
+
   },
   preparePagination: function() {
     var pages = Math.ceil(this.results.total / this.results.count)
@@ -388,7 +391,7 @@ var app = {
   },
   search: function(data) {
     var self = this;
-    apiUrl = 'http://api.jobs2careers.com/api/search.php';
+    apiUrl = '//api.jobs2careers.com/api/search.php';
 
     $('#results_total_title, footer').hide();
     $('.loader').show();
