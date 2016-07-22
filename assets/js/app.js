@@ -68,6 +68,7 @@ var app = {
       new google.maps.places.PlacesService(document.getElementById('map'));
 
     service.nearbySearch({
+      country: 'usa',
       location: location,
       types: ['(cities)'],
       language: 'en',
