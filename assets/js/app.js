@@ -46,7 +46,7 @@ var app = {
       geoPosition.getCurrentPosition(function(position) {
         var lat = position.coords.latitude,
           lng = position.coords.longitude,
-          location = lat + ',' + lng;
+          location = {lat: lat, lng: lng};
         self.setDefaultLocation(location);
       }, function(error) { console.log(error); }, {timeout: 10000});
     }
