@@ -68,7 +68,8 @@ var app = {
 
     service.nearbySearch({
       location: location,
-      types: ['(cities)']
+      types: ['(cities)'],
+      radius: 500
     }, function(places) {
       var currentLocation = url('?l');
       if(currentLocation) {
