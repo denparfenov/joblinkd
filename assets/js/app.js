@@ -64,7 +64,7 @@ var app = {
     var self = this;
 
     var service =
-      new google.maps.places.PlacesService(document.getElemenetById('map'));
+      new google.maps.places.PlacesService(document.getElementById('map'));
 
     service.nearbySearch({
       location: location,
