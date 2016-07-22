@@ -37,7 +37,7 @@ var app = {
 
     if('localStorage' in window && window['localStorage'] !== null) {
       if(localStorage.getItem('currentCity')) {
-        self.setCurrentCity(localStorage.getItem('currentCity'));
+        self.setCurrentCity(localStorage.getItem('currentCity'), true);
         return;
       }
     }
@@ -51,9 +51,12 @@ var app = {
       }, function(error) { console.log(error); }, {timeout: 10000});
     }
   },
-  setCurrentCity: function(city) {
+  setCurrentCity: function(city, setStorage) {
+    setStorage = setStorage || false
     $('#currentCity').html(city);
-    localStorage.setItem('currentCity', city);
+    if(setStorage) {
+      localStorage.setItem('currentCity', city);
+    }
     this.searchParams.l = city;
     $('input[name="location"]').val(city);
   },
@@ -72,12 +75,12 @@ var app = {
     }, function(places) {
       var currentLocation = url('?l');
       if(currentLocation) {
-        self.setCurrentCity(currentLocation);
+        self.setCurrentCity(currentLocation, false);
         return;
       }
       if(places.length == 0) { return; }
 
-      self.setCurrentCity(places[0].name);
+      self.setCurrentCity(places[0].name, true);
     });
 
   },
