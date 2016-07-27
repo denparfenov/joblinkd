@@ -258,6 +258,14 @@ li .btn-sm {
 }
 
 @media(max-width:767px) {
+    #mobile-logo {
+      display: inline-block;
+    }
+
+    #desktop-logo {
+      display: none;
+    }
+
     .intro-message {
         padding-bottom: 15%;
     }
@@ -292,6 +300,9 @@ li .btn-sm {
 }
 
 @media (min-width: 768px) {
+    #mobile-logo {
+      display: none;
+    }
     .form-inline .form-control {
         width: 300px;
     }
@@ -301,6 +312,9 @@ li .btn-sm {
 }
 
 @media (min-width: 1441px) {
+    #mobile-logo {
+      display: none;
+    }
     .logo-area {
         margin-right: -1px;
     }
