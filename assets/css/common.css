@@ -446,7 +446,7 @@ blockquote {
 .dropdown-menu .input-group{
     padding: 8px 12px 8px 18px;
 }
-.pac-container{
+.pac-container:after{display:none !important;
   z-index: 99999;
 }
 
