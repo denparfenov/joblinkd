@@ -396,6 +396,7 @@ var app = {
   search: function(data) {
     var self = this;
     apiUrl = '/api/search.php';
+    //apiUrl = 'http://api.jobs2careers.com/api/search.php';
 
     $('#results_total_title, footer').hide();
     $('.loader').show();
@@ -431,7 +432,26 @@ var app = {
       $('.loader').hide();
     });
   },
+  changeJobAlertLinks: function() {
+    var self = this;
+
+    setTimeout(function() {
+      if ($('iframe').contents().find('a').length == 2) {
+        $('iframe')
+          .contents()
+          .find('a[href="http://www.jobs2careers.com/term.php"]')
+          .prop('href', '/terms');
+        $('iframe')
+          .contents()
+          .find('a[href="http://www.jobs2careers.com/privacy.php"]')
+          .prop('href', '/privacy');
+      } else {
+        self.changeJobAlertLinks();
+      }
+    }, 500);
+  },
   jobAlertsBind: function() {
+    var self = this;
     $('.get-job-alerts').on('click', function(e) {
       e.preventDefault();
       document.cookie =
@@ -443,7 +463,8 @@ var app = {
             "baseUrl": "mc.us13.list-manage.com",
             "uuid": "a1ec6237ba8ad187e887dc2e8",
             "lid": "166e09695b"
-          })
+          });
+          self.changeJobAlertLinks();
         }
       );
     });

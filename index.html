@@ -87,7 +87,7 @@
                                                     <div class="input-group">
                                                       <input type="text" class="form-control" placeholder="ZIP Code">
                                                       <span class="input-group-btn">
-                                                        <button class="btn btn-default" type="button">+</button>
+                                                        <button class="btn btn-success" type="button">+</button>
                                                       </span>
                                                     </div>
                                                 </li>
@@ -225,7 +225,7 @@
                                           <span id="search-btn" class="input-group-btn">
                                             <a href="/results">
                                             <div class="btn-lg btn-default icon-gray" type="button">
-                                                    <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                                              <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
                                             </div>
                                             </a>
                                           </span>
@@ -233,7 +233,10 @@
                                     </div>
                                 </div>
                                 <div class="autofill-bar pull-right">
-                                    <div class="form-group">
+                                    <div class="form-group" style="position: relative;">
+                                    <div class="location-icon">
+                                      <img src="/assets/img/location.png" alt=""/>
+                                    </div>
                                     <div class="autofill-form">
                                         <input type="text" name="location" placeholder="Location">
                                     </div>
@@ -269,10 +272,21 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-xs-12">
-            <blockquote>
-                <q>Joblinkd is a comprehensive resource that can help you find a gig for extra cash or your next big career move.</q>
-            </blockquote>
+        <div id="tagline" class="col-xs-12">
+          <h1>Search Millions of Jobs</h1>
+          <h2>Top Companies. More Jobs.</h2>
+          <p>
+            Joblinkd. is a comprehensive resource that can help you find a gig for extra cash
+            or your next big career move.
+          </p>
+
+          <p>
+            Search millions of jobs at once to find the perfect job for you.
+          </p>
+
+          <p>
+            Joblinkd. — your link to your next job.
+          </p>
         </div>
     </div>
     <div class="row">
@@ -376,15 +390,15 @@
 
 <div id="about-content" class="page-content" style="display: none;">
   <div class="container">
-    <h2>About Us</h2>
-    <p>
+    <h1 class="text-center">About Us</h1>
+    <p class="text-center">
       We’re a tech company focused on making online job searches better. We search the other job sites, and show you all the information you need to make the best job search decisions.
     </p>
-    <p>
+    <p class="text-center">
       And because our tech team is constantly looking for ways to searching for jobs even easier, we offer a variety of tools and features such as email alerts and localized search results.
     </p>
-    <p>
-      Joblinkd. is an subsidiary of Thryve Media Group.
+    <p class="text-center">
+      <span>Joblinkd.</span> is an subsidiary of <span>Thryve Media Group</span>.
     </p>
   </div>
 </div>

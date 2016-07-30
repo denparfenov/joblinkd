@@ -450,6 +450,11 @@ blockquote {
   z-index: 99999;
 }
 
+#jobs-tab{
+  font-size: 1.5em;
+  font-weight: bolder;
+}
+
 #jobs-tab a:hover, #jobs-tab a:focus, #jobs-tab a:visited{
   border: 0 !important;
   color: #fff !important;
@@ -463,4 +468,46 @@ blockquote {
 
 #search-btn{
   cursor: pointer;
+}
+.location-icon{
+  width: 25px;
+  height: 30px;
+  position: absolute;
+  left: -25px;
+  background-color: gray;
+}
+
+.location-icon img{
+  margin-top: 6px;
+  margin-left: 3px;
+}
+
+#about-content{
+  font-size: 1.5em;
+}
+
+#about-content h1{
+  margin-bottom: 40px;
+}
+
+#about-content span{
+  color: #80aa37;
+}
+
+#tagline h1{
+  font-size:56pt;
+  font-family:Arial;
+  color:rgb(114,166,50);
+}
+
+#tagline h2{
+  font-size:28pt;
+  font-family:Arial;
+  padding-bottom: 20px;
+}
+
+#tagline p{
+  font-size:18pt;
+  font-family:Arial;
+  color:rgb(168,168,168);
 }
