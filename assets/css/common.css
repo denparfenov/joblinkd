@@ -290,12 +290,16 @@ li .btn-sm {
     padding-top: 70px;
     }
 
+    #adwords-right{
+      right: -150px !important;
+    }
+
     .res-filter .pull-right {
-        float: left !important;
+      float: left !important;
     }
 
     .navbar-inverse .navbar-nav .open .dropdown-menu>li>a {
-        color:#ffffff;
+      color:#ffffff;
     }
 }
 
@@ -510,4 +514,19 @@ blockquote {
   font-size:18pt;
   font-family:Arial;
   color:rgb(168,168,168);
+}
+
+#adwords-top{
+  width: 728px;
+  height: 90px;
+  margin: 10px;
+  overflow: hidden;
+}
+
+#adwords-right{
+  width: 160px;
+  height: 600px;
+  position: absolute;
+  right: 50px;
+  overflow: hidden;
 }
