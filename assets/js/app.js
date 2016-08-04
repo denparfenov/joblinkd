@@ -396,7 +396,7 @@ var app = {
   search: function(data) {
     var self = this;
     apiUrl = '/api/search.php';
-    apiUrl = 'http://api.jobs2careers.com/api/search.php';
+    //apiUrl = 'http://api.jobs2careers.com/api/search.php';
 
     $('#results_total_title, footer').hide();
     $('.loader').show();
