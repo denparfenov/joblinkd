@@ -594,7 +594,7 @@
 
 <div id="results-content" style="display: none;" class="page-content">
     <div class="container">
-        <div class="row">
+        <div class="row" style="position: relative;">
             <div class="results">
                 <ul class="breadcrumbs-list" style="display: none;">
                     <li><a href="/">Home</a></li>
@@ -602,6 +602,21 @@
                     <li style="display: none;"><a href="#" id="breadcrumbs_state_jobs"></a></li>
                     <li><a id="breadcrumbs_location_jobs"></a></li>
                 </ul>
+
+                <div id="adwords-top" style="width: 728px; height: 90px; margin: 10px;">
+                  <script id="mNCC" language="javascript">
+                     medianet_width = "728";
+                     medianet_height = "90";
+                     medianet_crid = "537671875";
+                     medianet_versionId = "111299";
+                     (function() {
+                         var isSSL = 'https:' == document.location.protocol;
+                         var mnSrc = (isSSL ? 'https:' : 'http:') + '//contextual.media.net/nmedianet.js?cid=8CUH1C278' + (isSSL ? '&https=1' : '');
+                         document.write('<scr' + 'ipt type="text/javascript" id="mNSC" src="' + mnSrc + '"></scr' + 'ipt>');
+                     })();
+                  </script>
+                </div>
+
                 <div class="col-xs-12 col-sm-12 col-md-9">
                     <div class="row">
                         <div class="col-sm-6">
@@ -638,20 +653,25 @@
                     <div id="jobs"></div>
 
                     <nav id="paginationholder">
-                    </div>
-                </div>
+                  </div>
             </div>
-            <!-- <div class="rel-searches hidden-sm hidden-xs">
-                <div class="col-sm-3">
-                    <div class="save-search">
-                        <div class="job_alert_btn_holder">
-                            <a class="btn btn-success" data-toggle="modal" data-target="#subscription">Get Job Alerts</a>
-                        </div>
-                    </div>
-                </div>
-            </div> -->
+
+            <div id="adwords-right" style="width: 160px;height: 600px;position: absolute;right: 0;">
+              <script id="mNCC" language="javascript">
+                medianet_width = "160";
+                medianet_height = "600";
+                medianet_crid = "521363401";
+                medianet_versionId = "111299";
+                (function() {
+                   var isSSL = 'https:' == document.location.protocol;
+                   var mnSrc = (isSSL ? 'https:' : 'http:') + '//contextual.media.net/nmedianet.js?cid=8CUH1C278' + (isSSL ? '&https=1' : '');
+                   document.write('<scr' + 'ipt type="text/javascript" id="mNSC" src="' + mnSrc + '"></scr' + 'ipt>');
+                })();
+              </script>
+            </div>
         </div>
     </div>
+  </div>
 </div>
 
 <!-- Footer -->
