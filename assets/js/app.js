@@ -435,7 +435,7 @@ var app = {
     var self = this;
 
     setTimeout(function() {
-      if ($('iframe').contents().find('a').length == 2) {
+      if ($('iframe').contents().find('.modalContent__content').find('a').length == 2) {
         $('iframe')
           .contents()
           .find('a[href="http://www.jobs2careers.com/term.php"]')
